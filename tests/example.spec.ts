@@ -1,9 +1,10 @@
 import {test, expect} from '@playwright/test';
 import {LandingPage} from "../src/pages/landing-page";
 import {BasePage} from "../src/pages/base-page";
+import {SimpleFormPage} from "../src/pages/simple-form-page";
 
 test.beforeEach(async ({page}) => {
-    // Runs before each test and signs in each page.
+    // Runs before each test.
     const basePage = new BasePage(page);
     const landingPage = new LandingPage(page);
     await basePage.goto();
@@ -11,9 +12,10 @@ test.beforeEach(async ({page}) => {
 });
 
 test('test Single Input Field', async ({page}) => {
-    await page.getByPlaceholder('Please enter your Message').fill('enqantado');
-    await page.getByRole('button', {name: 'Show Message'}).click();
-    await expect(page.locator('#display')).toContainText('enqantado');
+    const simpleFormPage = new SimpleFormPage(page);
+    await simpleFormPage.sendMessageBox('enqantado');
+    await simpleFormPage.clickShowMessage();
+    await simpleFormPage.checkMessageButton('enqantado');
 });
 
 test('sum test', async ({page}) => {
