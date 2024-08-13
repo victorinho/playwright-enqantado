@@ -19,10 +19,14 @@ test('test Single Input Field', async ({page}) => {
 });
 
 test('sum test', async ({page}) => {
-    await page.getByLabel('Enter a').click();
+    const simpleFormPage = new SimpleFormPage(page);
+    await simpleFormPage.numberForSum('10','20')
+    await simpleFormPage.clickShowSumatory()
+
+    /*await page.getByLabel('Enter a').click();
     await page.getByLabel('Enter a').fill('10');
     await page.getByLabel('Enter b').click();
     await page.getByLabel('Enter b').fill('20');
-    await page.getByRole('button', {name: 'Get Total'}).click();
+    await page.getByRole('button', {name: 'Get Total'}).click();*/
     await expect(page.getByText('30')).toBeVisible();
 });
