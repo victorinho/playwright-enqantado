@@ -1,17 +1,14 @@
 import { type Locator, type Page } from '@playwright/test';
 
 export class LandingPage {
-    readonly inputForm: Locator;
-    readonly simpleFormDemo: Locator;
+    readonly elementsLocator: Locator;
 
     constructor(page: Page) {
-        this.inputForm = page.locator('#treemenu').getByRole('link', { name: 'Input Forms' });
-        this.simpleFormDemo = page.getByRole('link', { name: 'Simple Form Demo' });
+        this.elementsLocator = page.locator('div').filter({ hasText: /^Elements$/ }).nth(1);
     }
 
-    async selectSimpleFormDemo() {
-        await this.inputForm.click();
-        await this.simpleFormDemo.click();
+    async selectElementsPage() {
+        await this.elementsLocator.click();
     }
 
 }

@@ -6,6 +6,6 @@ export class BasePage {
         this.page = page;
     }
     async goto() {
-        await this.page.goto('https://demo.seleniumeasy.com/');
+        await this.page.goto('https://demoqa.com');
     }
 }

@@ -1,29 +1,27 @@
 import {test, expect} from '@playwright/test';
 import {LandingPage} from "../src/pages/landing-page";
 import {BasePage} from "../src/pages/base-page";
-import {SimpleFormPage} from "../src/pages/simple-form-page";
+import {ElementsPage} from "../src/pages/elements-page";
 
 test.beforeEach(async ({page}) => {
     // Runs before each test.
     const basePage = new BasePage(page);
     const landingPage = new LandingPage(page);
     await basePage.goto();
-    await landingPage.selectSimpleFormDemo();
+    await landingPage.selectElementsPage()
 });
 
 test('test Single Input Field', async ({page}) => {
-    const simpleFormPage = new SimpleFormPage(page);
-    await simpleFormPage.sendMessageBox('enqantado');
-    await simpleFormPage.clickShowMessage();
-    await simpleFormPage.checkMessageButton('enqantado');
+    const simpleFormPage = new ElementsPage(page);
+    await simpleFormPage.clickTextBox();
 });
 
 test('sum test', async ({page}) => {
-    const simpleFormPage = new SimpleFormPage(page);
-    await simpleFormPage.numberForSum('10','20')
+    const simpleFormPage = new ElementsPage(page);
+    /*await simpleFormPage.numberForSum('10','20')
     await simpleFormPage.clickShowSumatory()
 
-    /*await page.getByLabel('Enter a').click();
+    await page.getByLabel('Enter a').click();
     await page.getByLabel('Enter a').fill('10');
     await page.getByLabel('Enter b').click();
     await page.getByLabel('Enter b').fill('20');
